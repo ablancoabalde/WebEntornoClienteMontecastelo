@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tarea 1. Ejercicio 2.</title>
+</head>
+
+<body>
+    <script>
+        // SOLUCIÓN EJERCICIO 2  
+
+        // Variables utilizadas
+        // Variable que almacena los datos pedidos por pantalla
+        let cantidaDados = prompt("Dime dados a tirar");
+        // Array para almacenar los resultados de la tiradas
+        let resultadoDados = [];
+        // Variable que muestra el nombre del juego
+        let msgTituloJuego = "DADOS IGUALES"
+        // Variable que muestra el número de dados a tirar
+        let msgNumDados = "Número de dados: " + cantidaDados;
+        // Variable para mostrar los dados sacados
+        let msgResultadoDados = "Dados: ";
+        // Variable para indicar cuál es el resultado de la partida
+        let msgFinal;
+
+        // Bucle que genera tiradas igual a la cantidad de dados que se ha introducido por pantalla
+        // añade los valores a la variable texto y al array.
+        for (i = 0; i < cantidaDados; i++) {
+            nRandom = Math.floor(Math.random() * 6) + 1;
+            msgResultadoDados += nRandom + ", ";
+            resultadoDados.push(nRandom);
+        }
+
+        // Sí la cantidad de datos es mayor que 1 llama a la función comprobar datos y muestra por consola el resultado
+        // si no, no cumple la condión para poder jugar al juego y muestra por consola la cadena un mensaje
+        if (cantidaDados > 1) {
+            msgFinal = comprobarDatos();
+            console.log(msgTituloJuego + "\n" + msgNumDados + "\n" + msgResultadoDados + "\n" + msgFinal)
+        } else {
+            msgFinal = "¡Imposible!";
+            console.log(msgTituloJuego + "\n" + msgNumDados + "\n" + msgFinal)
+        }
+
+        // Función que comprueba que la posición i e i+1 sean iguales, si alguna vez se cumple cambia el valor de la variable
+        // booleana a false y según el estado de la condición devuelve una cadena de texto y otra.
+        function comprobarDatos() {
+            let condicion = true;
+
+            for (i = 0; i < resultadoDados.length - 1; i++) {
+                if (resultadoDados[i] == resultadoDados[i + 1]) {
+                    condicion = false;
+                }
+            }
+
+            if (condicion == true) {
+                return "El jugador ha ganado";
+            } else {
+                return "El jugador ha perdido";
+            }
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>

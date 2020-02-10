@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tarea 1. Ejercicio 4.</title>
+    <script src="01_objetos.js"></script>
+</head>
+
+<body>
+
+    <p>
+        <b>Películas publicadas antes del año 2000:</b>
+        <span id="Peliculas"></span>
+    </p>
+
+    <p>
+        <b>Lista de actores:</b>
+        <span id="Actores"></span>
+    </p>
+
+    <p>
+        <b>El valor de la propiedad number es:</b>
+        <span id="Number"></span>
+    </p>
+
+    <script>
+        // SOLUCIÓN EJERCICIO 4
+        
+        // Variables utilizadas
+        // Array actores
+        let arrayActores = [];
+        // Variable salida de para las películas parte de un salto de línea porque en la insercción del html se hace directamente en el parrafo con el elemento span
+        let msgPeliculas = "<br/>";
+        // Variable salida de para los actores
+        let msgActores = "<br/>";
+
+        // Creo un array solo con las claves del objeto movies
+        let arrayMovies = Object.keys(movies);
+
+        // Recorro el nuevo array de claves
+        arrayMovies.forEach(element => {
+
+            // Condición para saber que peliculas se estrenaron antes del 2000
+            if (movies[element].releaseDate < 2000) {
+                msgPeliculas += element + "<br/>";
+            }
+
+            // Bucle para almacenar todos los actores de todas las películas
+            for (i = 0; i < movies[element].actors.length; i++) {
+                arrayActores.push(movies[element].actors[i]);
+            }
+
+        });
+
+        // El objeto Set te permite almacenar valores únicos de cualquier tipo
+        let arrayUnicos = new Set(arrayActores);
+
+        // Buele para mostrar los actores de la películas no repetidos
+        for (let actor of arrayUnicos) {
+            msgActores += actor + "<br/>";
+        }
+
+        // Insercción del html
+        document.getElementById("Peliculas").innerHTML = msgPeliculas;
+        document.getElementById("Actores").innerHTML = msgActores;
+        // Forma para obtener el valor de la propiedad number.        
+        document.getElementById("Number").innerHTML = myObject["some array"][2]["number"];
+
+
+    </script>
+
+</body>
+
+</html>

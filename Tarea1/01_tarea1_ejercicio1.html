@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tarea 1. Ejercicio 1.</title>
+</head>
+
+<body>
+    <script>
+        // SOLUCIÓN EJERCICIO 1
+
+        // Variables utilizadas
+        // arrays para almacenar las cartas generadas
+        let cartasJugador1 = [];
+        let cartasJugador2 = [];
+        // Nombre de los jugadores por si se quieren cambiar
+        let jugador1 = "Gloria";
+        let jugador2 = "Hector";
+        // Nombre del juego para mostrar
+        let msgTituloJuego = "JUEGO DEL QUINCE"
+        // Cadena con nombre del jugador + texto
+        let msgJugador1 = jugador1 + " ha sacado";
+        let msgJugador2 = jugador2 + " ha sacado";
+        // Variable para indicar cuál es el resultado final
+        let msgFinal = "";
+        // Condiciones que indican si se han pasado de 15
+        let condicionJugador1 = true;
+        let condicionJugador2 = true;
+
+        // Bucle que genera 3 números random y las almacena en el array de cada jugador
+        // añade los valores generados a la cadena de texto de cada jugador
+        for (i = 0; i < 3; i++) {
+            nRandom1 = Math.floor(Math.random() * 10) + 1;
+            nRandom2 = Math.floor(Math.random() * 10) + 1;
+            msgJugador1 += " un " + nRandom1 + ", ";
+            msgJugador2 += " un " + nRandom2 + ", ";
+            cartasJugador1.push(nRandom1);
+            cartasJugador2.push(nRandom2);
+        }
+        // Función reduce ejecuta una función reductora sobre cada elemento de un array, devolviendo como resultado un único valor.
+        // acumulador es la variable que va almacenando el valor de cada operación en el array
+        // valorActual es la variable que carga el valor que contiene el indice
+        // y el 0 es el valor inicial en la primera llamada
+        let totalJugador1 = cartasJugador1.reduce((acumulador, valorActual) => acumulador + valorActual, 0);
+        let totalJugador2 = cartasJugador2.reduce((acumulador, valorActual) => acumulador + valorActual, 0);
+
+        // Añadimos el resultado de la suma total a la cadena de texto
+        msgJugador1 += "Suma " + totalJugador1 + ".";
+        msgJugador2 += "Suma " + totalJugador2 + ".";
+
+        // Evalua si el jugador1 se ha pasado de 15
+        if (totalJugador1 > 15) {
+            msgJugador1 += " Se ha pasado."
+            condicionJugador1 = false;
+        }
+        // Evalua si el jugador2 se ha pasado de 15
+        if (totalJugador2 > 15) {
+            msgJugador2 += " Se ha pasado."
+            condicionJugador2 = false;
+        }
+
+        // Sí el jugador 1 es mayor que el 2 y el jugador 2 se ha pasado de 15 y el jugador 1 no se ha pasado de 15 gana jugador1
+        if ((totalJugador1 > totalJugador2 || condicionJugador2 == false) && condicionJugador1 == true) {
+            msgFinal += "Ha ganado " + jugador1;
+        } else if (totalJugador1 == totalJugador2 && condicionJugador1 == true) {
+            msgFinal = "Han empatado";
+        } else if (condicionJugador1 == false && condicionJugador2 == false) {
+            msgFinal = "No ha ganado nadie";
+        } else if ((totalJugador2 > totalJugador1 || condicionJugador1 == false) && condicionJugador2 == true) {
+            msgFinal += "Ha ganado " + jugador2;
+        }
+
+
+        console.log(msgTituloJuego + "\n" + msgJugador1 + "\n" + msgJugador2 + "\n" + msgFinal);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tarea 1. Ejercicio 3.</title>
+</head>
+
+<body>
+
+    <p id="Parrafo"></p>
+
+
+
+    <script>
+        // SOLUCIÓN EJERCICIO 3
+
+        // Variables utilizadas
+        // Array Libros
+        let arrayLibros = [];
+        // Variable salida de cadena
+        let msgSalida = "";
+
+        // Constructor Libro
+        function Libro(titulo, autor, anhoPublicacion, leido) {
+            this.titulo = titulo;
+            this.autor = autor;
+            this.anhoPublicacion = anhoPublicacion;
+            this.leido = leido;
+        }
+        
+        // Agregamos metodo getAntiguedad a la clase libro
+        // función que calculo los años transcurridos desde la publicación, para ello se hace con el año presente o que tiene el sistema registrado y se resta el año de publicación y retorna el valor
+        Libro.prototype.getAntiguedad = function () {
+            let anhoToday = new Date;
+            let calculoAnhos = anhoToday.getFullYear() - this.anhoPublicacion
+            return calculoAnhos;
+        };
+
+
+        // Objetos Libros
+        libro1 = new Libro("20 mil leguas de viaje submarino", "Julio Verne", 1869, false);
+        libro2 = new Libro("Asesinato en el Orient Express", "Agatha Christie", 1934, true);
+        libro3 = new Libro("Rebelión en la granja", "George Orwell", 1945, true);
+
+        // Añadimos los libros al array
+        arrayLibros.push(libro3);
+        arrayLibros.push(libro1);
+        arrayLibros.push(libro2);
+
+        // Función para ordenar el array
+        function ordenarArray() {
+            // A la función sort le añadimos una función que lo que hace es restar los años de publicación de cada libro y devuelve el resultado y con eso sort ordena el array 
+            arrayLibros.sort(function (a, b) {
+                return (a.anhoPublicacion - b.anhoPublicacion);
+            });
+        }
+
+        // LLamada al metodo ordenarArray para que lo ordene
+        ordenarArray();
+
+        // Recorremos el array con el foreach y según se haya leido inserta una cadena u otra.
+        arrayLibros.forEach(element => {
+
+            if (element.leido == false) {
+                msgSalida += "Todavía no he leido " + element.titulo + " escrito por " + element.autor + " (" + element.anhoPublicacion + ") hace " + element.getAntiguedad() + " años.<br/>";
+
+            } else {
+                msgSalida += "Ya he leido " + element.titulo + " escrito por " + element.autor + " (" + element.anhoPublicacion + ") hace " + element.getAntiguedad() + " años.<br/>";
+
+            }
+            document.getElementById("Parrafo").innerHTML
+                = msgSalida;
+
+        });
+
+    </script>
+
+
+
+</body>
+
+</html>
